@@ -1,14 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const blogRoutes = require('./routes/blogRoutes');
+const dotenv = require('dotenv').config();
 
 // Express App
 const app = express();
 
 // Mongodb Connection
-const dbURI = 'mongodb+srv://Geyanth:Tool1234@nodeblogs.d8oje.mongodb.net/NodeBlogs?retryWrites=true&w=majority'
+const dbURI = process.env.MONGODB_URI;
+const PORT = process.env.PORT || 3000;
+
 mongoose.connect(dbURI)
-    .then(() => app.listen(3000))
+    .then(() => app.listen(PORT))
     .catch((err) => console.log(err))
 
 // Register View Engine
